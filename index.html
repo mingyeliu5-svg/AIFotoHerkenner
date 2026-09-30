@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AI Afbeelding Checker</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+    <main class="container">
+
+        <header class="hero">
+
+            <h1>AI Afbeelding Checker</h1>
+
+            <p class="subtitle">
+                Verberg een onzichtbare identificatiecode in een afbeelding
+                en controleer deze later met behulp van Supabase.
+            </p>
+        </header>
+
+
+        <!-- ==========================================
+             AFBEELDING REGISTREREN
+        =========================================== -->
+
+        <section class="card">
+
+            <div class="section-header">
+                <div>
+                    <span class="step">01</span>
+                    <h2>Afbeelding registreren</h2>
+                </div>
+
+                <span class="badge">Encoder</span>
+            </div>
+
+
+            <label for="imageInput">
+                Afbeelding
+            </label>
+
+            <input
+                type="file"
+                id="imageInput"
+                accept="image/*"
+            >
+
+
+            <div class="form-grid">
+
+                <div>
+
+                    <label for="aiSystemInput">
+                        AI-systeem
+                    </label>
+
+                    <input
+                        type="text"
+                        id="aiSystemInput"
+                        placeholder="Bijv. OpenAI"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label for="modelInput">
+                        Model
+                    </label>
+
+                    <input
+                        type="text"
+                        id="modelInput"
+                        placeholder="Bijv. GPT Image"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <label for="identifierInput">
+                Identificatienummer
+            </label>
+
+            <div class="identifier-row">
+
+                <input
+                    type="text"
+                    id="identifierInput"
+                    readonly
+                >
+
+                <button
+                    type="button"
+                    id="newIdentifierButton"
+                    class="secondary"
+                >
+                    Nieuw nummer
+                </button>
+
+            </div>
+
+
+            <div class="button-row">
+
+                <button
+                    type="button"
+                    id="encodeButton"
+                    class="primary"
+                >
+                    Code verstoppen
+                </button>
+
+                <button
+                    type="button"
+                    id="downloadButton"
+                    class="secondary"
+                    disabled
+                >
+                    PNG opslaan
+                </button>
+
+            </div>
+
+
+            <div class="image-container">
+
+                <canvas id="canvas"></canvas>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             AFBEELDING CONTROLEREN
+        =========================================== -->
+
+        <section class="card">
+
+            <div class="section-header">
+                <div>
+                    <span class="step">02</span>
+                    <h2>Afbeelding controleren</h2>
+                </div>
+
+                <span class="badge">Decoder</span>
+            </div>
+
+
+            <label for="checkInput">
+                Afbeelding om te controleren
+            </label>
+
+            <input
+                type="file"
+                id="checkInput"
+                accept="image/*"
+            >
+
+
+            <button
+                type="button"
+                id="checkButton"
+                class="primary full-width"
+            >
+                Controleer afbeelding
+            </button>
+
+
+            <div
+                id="result"
+                class="result neutral"
+            >
+                Nog geen afbeelding gecontroleerd.
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             UITLEG
+        =========================================== -->
+
+        <section class="card explanation">
+
+            <h2>Hoe werkt het?</h2>
+
+            <p>
+                De identificatiecode wordt als bits verdeeld over RGB-waarden
+                van verschillende pixels. Per kleurkanaal wordt maximaal één
+                waarde aangepast.
+            </p>
+
+            <p>
+                Hierdoor wordt de afbeelding normaal gesproken niet zichtbaar
+                veranderd. Het controleprogramma gebruikt hetzelfde patroon
+                om de code later terug te vinden.
+            </p>
+
+            <p class="warning">
+                Gebruik voor deze prototypeversie PNG. JPEG-compressie kan de
+                verborgen informatie veranderen.
+            </p>
+
+        </section>
+
+
+        <footer>
+            AI-afbeeldingen herkennen
+        </footer>
+
+    </main>
+
+
+    <!-- Supabase JavaScript library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Eigen JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
